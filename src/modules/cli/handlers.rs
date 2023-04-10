@@ -1,27 +1,32 @@
+use owo_colors::OwoColorize;
+
 use super::cli::Skyull;
 use crate::modules::cli::templates::template_struct::Template;
 use std::env;
+use std::path::PathBuf;
 use std::process::Stdio;
 use std::{fs, process::Command};
 
 pub fn create_project(project_data: Skyull) -> std::io::Result<()> {
     let binding = env::current_dir()?;
-    let path_to_create = binding.to_str().unwrap();
-    let _path_dir_ = format!("{}\\{}", path_to_create, project_data.name.as_str());
-    let path_dir = _path_dir_.as_str();
-
-    if fs::metadata(path_dir).is_ok() {
-        println!("Prject already exists\nAdding Dependecies...");
-        add_project_dependencies(path_dir, path_to_create);
-    } else {
-        fs::create_dir(path_dir);
-        init_cargo(path_dir);
-        add_project_dependencies(path_dir, path_to_create);
+    let mut path_dir = PathBuf::from(&binding);
+    path_dir.push(&project_data.name);
+    match fs::metadata(&path_dir) {
+        Ok(_) => {
+            println!("{}", "Prject already exists".red());
+            add_project_dependencies(&path_dir, &binding);
+        }
+        Err(_) => {
+            fs::create_dir(&path_dir);
+            init_cargo(&path_dir);
+            add_project_dependencies(&path_dir, &binding);
+        }
     }
     Ok(())
 }
 
-fn init_cargo(path_dir: &str) -> std::io::Result<()> {
+fn init_cargo(path_dir: &PathBuf) -> std::io::Result<()> {
+    println!("{}", "Creating bin directory".purple());
     Command::new("cargo")
         .stdout(Stdio::null())
         .arg("init")
@@ -31,15 +36,18 @@ fn init_cargo(path_dir: &str) -> std::io::Result<()> {
     Ok(())
 }
 
-fn add_project_dependencies(path_dir: &str, path_root: &str) -> std::io::Result<()> {
-    let _cargo_toml_path = format!("{}\\Cargo.toml", path_dir);
-    let _template_path = format!("{}\\templates\\{}.json", path_root, "t1_rocket");
-    let template = helper_get_template(_template_path)?;
+fn add_project_dependencies(path_dir: &PathBuf, path_root: &PathBuf) -> std::io::Result<()> {
+    println!("{}", "Adding project dependencies".cyan());
+    let mut cargo_project_dir = PathBuf::from(path_dir);
+    cargo_project_dir.push("Cargo.toml");
+    let mut path_template = PathBuf::from(path_root);
+    path_template.push("templates/t1_rocket.json");
+    let template = helper_get_template(&path_template)?;
     println!("{:?}", template);
     Ok(())
 }
 
-fn helper_get_template(template_path: String) -> std::io::Result<Template> {
+fn helper_get_template(template_path: &PathBuf) -> std::io::Result<Template> {
     let _template_content = fs::read_to_string(template_path)?;
     let template: Template = serde_json::from_str(&_template_content)?;
     Ok(template)
