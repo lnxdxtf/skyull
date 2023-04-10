@@ -7,12 +7,8 @@
     "dependencies": [
         {
             "name": "rocket",
-            "version": "v0.5-rc ",
-            "features": [
-                "secrets",
-                "tls",
-                "json"
-            ]
+            "version": "0.5.0-rc.3",
+            "features": []
         }
     ]
 }

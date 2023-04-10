@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.2.1", features = ["derive"] }
+dotenv = "0.15.0"
 indicatif = "0.17.3"
 owo-colors = "3.5.0"
 serde = {version = "1.0.159", features = ["derive"]}
