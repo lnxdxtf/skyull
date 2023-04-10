@@ -1,0 +1,14 @@
+{
+    "package": {
+        "name": "",
+        "version": "0.1.0",
+        "edition": "2022"
+    },
+    "dependencies": [
+        {
+            "name": "actix",
+            "version": "4",
+            "features": []
+        }
+    ]
+}
