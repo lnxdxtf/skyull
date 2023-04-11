@@ -1,4 +1,8 @@
 # SKYULL CLI README
+  <p>
+    <a href="https://github.com/lnxdxtf/skyull/actions/workflows/skyull_tests_and_build.yml"><img alt="Build Status" src="https://github.com/lnxdxtf/skyull/actions/workflows/skyull_tests_and_build.yml/badge.svg?branch=main"/></a>
+   
+  </p>
 
 SKYULL is a command-line interface (CLI) in development that creates REST API project structure templates with the aim of making it easy and fast to start a new project. With just a few primary configurations, such as project name, you can get started quickly.
 
