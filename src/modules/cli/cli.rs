@@ -21,13 +21,13 @@ pub enum EnumCommandsSkyull {
 #[derive(ValueEnum, Debug, Clone)]
 pub enum ArgTemplate {
     Rocket,
-    Actix,
+    ActixWeb,
 }
 impl ToString for ArgTemplate {
     fn to_string(&self) -> String {
         match *self {
             ArgTemplate::Rocket => "Rocket".to_string(),
-            ArgTemplate::Actix => "Actix".to_string(),
+            ArgTemplate::ActixWeb => "ActixWeb".to_string(),
         }
     }
 }
