@@ -3,7 +3,7 @@ use clap::{Parser, ValueEnum};
 #[derive(Parser, Debug)]
 #[command(author="lnxdxtf", version="1.0", about, long_about = None)]
 pub struct Skyull {
-    pub cmd: CommandsSkyull,
+    pub command: EnumCommandsSkyull,
     /// Name of the project
     #[arg(short, long, default_value = "skyull_project")]
     pub name: String,
@@ -13,7 +13,7 @@ pub struct Skyull {
 }
 
 #[derive(ValueEnum, Debug, Clone)]
-pub enum CommandsSkyull {
+pub enum EnumCommandsSkyull {
     New,
     Other,
 }

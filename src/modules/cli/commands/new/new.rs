@@ -1,5 +1,5 @@
-use super::cli::{ArgTemplate, Skyull};
-use crate::modules::cli::templates::template_struct::{Dependency, Template};
+use crate::modules::cli::cli::{ArgTemplate, Skyull};
+use crate::modules::cli::commands::new::templates::template_struct::Dependency;
 use owo_colors::OwoColorize;
 use std::{
     env, fs,
@@ -8,14 +8,13 @@ use std::{
     vec,
 };
 
-pub fn create_project(project_data: Skyull) -> std::io::Result<()> {
+pub fn new_project(project_data: Skyull) -> std::io::Result<()> {
     let current_dir = env::current_dir()?;
     let mut project_dir = PathBuf::from(&current_dir);
     project_dir.push(&project_data.name);
     match fs::metadata(&project_dir) {
         Ok(_) => {
             println!("{}", "Prject already exists".red());
-            add_project_dependencies(&project_dir, &project_data.template);
         }
         Err(_) => {
             fs::create_dir(&project_dir);
@@ -27,7 +26,7 @@ pub fn create_project(project_data: Skyull) -> std::io::Result<()> {
 }
 
 fn init_cargo(project_dir: &PathBuf) -> std::io::Result<()> {
-    println!("{}", "Creating bin directory".purple());
+    println!("{}", "Creating bin directory".cyan());
     Command::new("cargo")
         .stdout(Stdio::null())
         .arg("init")
@@ -39,9 +38,8 @@ fn init_cargo(project_dir: &PathBuf) -> std::io::Result<()> {
 
 fn add_project_dependencies(project_dir: &PathBuf, template_type: &ArgTemplate) -> std::io::Result<()> {
     println!("{}", "Adding project dependencies".cyan());
-    let mut cargo_project_dir = PathBuf::from(project_dir);
     let common_dependencies = common_dependencies();
-    let (template, dependencies) = match template_type {
+    let dependencies = match template_type {
         ArgTemplate::Rocket => {
             let rocket_package_name = env::var("ROCKET_PACKAGE_NAME").unwrap_or_default();
             let rocket_version = env::var("ROCKET_VERSION").ok();
@@ -52,12 +50,11 @@ fn add_project_dependencies(project_dir: &PathBuf, template_type: &ArgTemplate) 
 
             let mut dependencies = vec![Dependency::new(rocket_package_name, rocket_version, rocket_features)];
             dependencies.extend(common_dependencies);
-            let template = Template::new(None, dependencies.clone());
-            (template, dependencies)
+            dependencies
         }
         ArgTemplate::Actix => todo!(),
     };
-    add_dependency(&dependencies);
+    add_dependencies(&dependencies, project_dir);
     Ok(())
 }
 
@@ -79,11 +76,16 @@ fn common_dependencies() -> Vec<Dependency> {
         .collect()
 }
 
-fn add_dependency(dependencies: &Vec<Dependency>) {
+fn add_dependencies(dependencies: &Vec<Dependency>, project_dir: &PathBuf) {
     for dep in dependencies.iter() {
         let mut dependency_project = format!("{}", dep.name);
         match &dep.version {
-            Some(version) => dependency_project.push_str(format!("@{}", version).as_str()),
+            Some(version) => {
+                if !version.is_empty() {
+                    dependency_project.push_str(format!("@{}", version).as_str())
+                }
+            }
+
             None => (),
         };
         match &dep.features {
@@ -91,14 +93,12 @@ fn add_dependency(dependencies: &Vec<Dependency>) {
             None => (),
         };
         println!("{}", dependency_project);
-        // Command::new("cargo")
-        //     // .stdout(Stdio::null())
-        //     .arg("add")
-        //     .arg(&dependency_project)
-        //     .current_dir(project_dir)
-        //     // .output()
-        //     .spawn()
-        //     .expect("Error Adding dependencies");
-        // println!("{:?}\n{:?}\n", project_dir, cargo_project_dir);
+        Command::new("cargo")
+            .stdout(Stdio::null())
+            .arg("add")
+            .arg(&dependency_project)
+            .current_dir(project_dir)
+            .output()
+            .expect("Error Adding dependencies");
     }
 }
