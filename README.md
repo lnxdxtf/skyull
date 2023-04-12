@@ -22,16 +22,10 @@ SKYULL is a command-line interface (CLI) in development that creates REST API pr
 
 Before installing the SKYULL CLI on your OS, you need to have Rust and Cargo installed on your system. If you haven't already installed Rust and Cargo, please follow the installation instructions available on the official website: https://www.rust-lang.org/tools/install.
 
-As the project is not yet published, you need to clone the repository and build the project in release mode using the following command:
-
+The crate is available on <a href="https://crates.io/crates/skyull">crates.io</a> so you can install it easily running:
 ```bash
-cargo build --release
+cargo install skyull
 ```
-After building the project successfully, you can install the CLI using the following command:
-```bash
-cargo install --path .
-```
-Finally, restart your terminal and run the skyull command to start using the CLI.
 
 ## Usage
 To use SKYULL CLI, simply run the following command:
