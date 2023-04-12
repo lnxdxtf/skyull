@@ -1,0 +1,3 @@
+(function() {var implementors = {
+"skyull":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.68.2/alloc/string/trait.ToString.html\" title=\"trait alloc::string::ToString\">ToString</a> for <a class=\"enum\" href=\"skyull/modules/cli/cli/enum.ArgTemplate.html\" title=\"enum skyull::modules::cli::cli::ArgTemplate\">ArgTemplate</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

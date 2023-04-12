@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["SeekFrom","Enumeration of possible methods to seek within an I/O object."]],"struct":[["ArgCursor","Position within [`RawArgs`]"],["ParsedArg","Command-line Argument"],["RawArgs","Command-line arguments"],["ShortFlags","Walk through short flags within a [`ParsedArg`]"]],"trait":[["OsStrExt",""]]};
