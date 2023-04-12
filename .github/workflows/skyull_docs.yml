@@ -1,0 +1,31 @@
+name: Build Docs and Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    concurrency: ci-${{github.ref}}
+
+    steps:
+    
+    - uses: actions/checkout@v3
+
+    - name: Build
+      run: cargo doc --release --verbose
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: ./target/doc/
+        branch: docs-gh-pages
+

@@ -1,0 +1,39 @@
+{
+    "rocket": {
+        "dependencies": [
+            {
+                "name": "rocket",
+                "version": "0.5.0-rc.3",
+                "features": []
+            }
+        ]
+    },
+    "actix_web": {
+        "dependencies": [
+            {
+                "name": "actix-web",
+                "version": "4",
+                "features": []
+            }
+        ]
+    },
+    "common_dependencies": {
+        "dependencies": [
+            {
+                "name": "redis",
+                "version": "",
+                "features": []
+            },
+            {
+                "name": "mongodb",
+                "version": "",
+                "features": []
+            },
+            {
+                "name": "",
+                "version": "",
+                "features": []
+            }
+        ]
+    }
+}
