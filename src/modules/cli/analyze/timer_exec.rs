@@ -1,5 +1,8 @@
 use owo_colors::OwoColorize;
 
+/// Get the time when the function was called
+/// Calculate the time when the functions is done
+/// And print the total time to execute
 pub fn get_time_exec<F>(func: F)
 where
     F: Fn(),

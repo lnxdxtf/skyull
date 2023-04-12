@@ -8,6 +8,8 @@ use std::{
     process::{exit, Command, Stdio},
 };
 
+/// Check if the directory exists and exits with 0x0
+/// else starts a new directory and add dependencies
 pub fn new_project(project_data: Skyull) -> std::io::Result<()> {
     let current_dir = env::current_dir()?;
     let mut project_dir = PathBuf::from(&current_dir);
@@ -27,6 +29,10 @@ pub fn new_project(project_data: Skyull) -> std::io::Result<()> {
     Ok(())
 }
 
+/// Start a new project with:
+/// ```rust ignore 
+/// cargo init
+/// ```
 fn init_cargo(project_dir: &PathBuf) -> std::io::Result<()> {
     println!("{}", "Creating bin directory".cyan());
     Command::new("cargo")
@@ -38,6 +44,7 @@ fn init_cargo(project_dir: &PathBuf) -> std::io::Result<()> {
     Ok(())
 }
 
+/// Access the project directory and add the dependencies
 fn add_project_dependencies(project_dir: &PathBuf, template_type: &ArgTemplate, templates: Templates) -> std::io::Result<()> {
     println!("{}", "Adding project dependencies".cyan());
     let common_dependencies = templates.common_dependencies.dependencies;
@@ -50,6 +57,10 @@ fn add_project_dependencies(project_dir: &PathBuf, template_type: &ArgTemplate, 
     Ok(())
 }
 
+/// Add the dependencies:
+/// ```rust ignore 
+/// cargo add <Dependency>@<Version> --features <feature>...
+/// ```
 fn add_dependencies(dependencies: &Vec<Dependency>, project_dir: &PathBuf) {
     for dep in dependencies.iter() {
         let mut dependency_project = format!("{}", dep.name);
