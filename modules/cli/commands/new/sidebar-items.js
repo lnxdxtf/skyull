@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["codegen","Code that will generate the template structure for the command new"],["new","Command “new”"],["templates","Templates definitions"]]};

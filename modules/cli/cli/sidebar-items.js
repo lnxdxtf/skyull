@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["ArgTemplate","Possible templates arguments for the command “new”"],["EnumCommandsSkyull","Possible Commands"]],"struct":[["Skyull",""]]};

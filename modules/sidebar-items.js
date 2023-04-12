@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["cli","This Module is responsible for the SKYULL CLI"]]};

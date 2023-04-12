@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["analyze","Module that analyses the time to execute the command/function"],["app","Module that starts the Skyull CLI"],["cli","Module that structures the Skyull CLI"],["commands","All commands that are executed on the Skyull CLI"]]};

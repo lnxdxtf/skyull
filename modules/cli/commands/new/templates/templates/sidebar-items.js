@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["get_templates","Include template definitions from a json file and returns a template struct"]]};

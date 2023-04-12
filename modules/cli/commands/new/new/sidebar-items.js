@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["add_dependencies","Add the dependencies:"],["add_project_dependencies","Access the project directory and add the dependencies"],["init_cargo","Start a new project with:"],["new_project","Check if the directory exists and exits with 0x0 else starts a new directory and add dependencies"]]};
