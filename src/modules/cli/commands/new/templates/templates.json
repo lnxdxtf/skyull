@@ -23,16 +23,6 @@
                 "name": "redis",
                 "version": "",
                 "features": []
-            },
-            {
-                "name": "mongodb",
-                "version": "",
-                "features": []
-            },
-            {
-                "name": "",
-                "version": "",
-                "features": []
             }
         ]
     }

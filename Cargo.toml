@@ -1,11 +1,11 @@
 [package]
 name = "skyull"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 authors = ["lnxdxtf <grmichaliszen.dev@gmail.com>"]
 rust-version = "1.67.0"
 description = "SKYULL is a command-line interface (CLI) in development that creates REST API project structure templates with the aim of making it easy and fast to start a new project. With just a few primary configurations, such as project name, you can get started quickly."
-documentation = "https://lnxdxtf.github.io/skyull/skyull/index.html"
+documentation = "https://lnxdxtf.github.io/skyull/skyull/"
 readme = "README.md"
 repository = "https://github.com/lnxdxtf/skyull"
 license = "MIT"
@@ -17,7 +17,6 @@ categories = ["command-line-utilities", "command-line-interface", "config", "fil
 
 [dependencies]
 clap = { version = "4.2.1", features = ["derive"] }
-dotenv = "0.15.0"
 indicatif = "0.17.3"
 owo-colors = "3.5.0"
 serde = {version = "1.0.159", features = ["derive"]}
