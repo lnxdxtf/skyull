@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1a",
+        "name": "Iron Plate",
+        "price": 4.2,
+        "description": null,
+        "category": null,
+        "image": null
+    },
+    {
+        "id": "1ab",
+        "name": "Iron Diamond",
+        "price": 42.25,
+        "description": null,
+        "category": null,
+        "image": null
+    },
+    {
+        "id": "1ac",
+        "name": "Leather Plate",
+        "price": 1.2,
+        "description": null,
+        "category": null,
+        "image": null
+    }
+]

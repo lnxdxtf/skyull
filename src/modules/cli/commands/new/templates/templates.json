@@ -23,6 +23,26 @@
                 "name": "redis",
                 "version": "",
                 "features": []
+            },
+            {
+                "name": "tungstenite",
+                "version": "0.19.0",
+                "features": []
+            },
+            {
+                "name": "async-trait",
+                "version": "0.1.68",
+                "features": []
+            },
+            {
+                "name": "serde",
+                "version": "1.0.160",
+                "features": []
+            },
+            {
+                "name": "serde_json",
+                "version": "1.0.96",
+                "features": []
             }
         ]
     }
