@@ -1,12 +1,16 @@
-use crate::adapters::database::memory::product_repository::memory_product_repository::ProductDatabaseJsonRepository;
-use domain::product::repository::product_repository::ProductRepository;
+use adapters::database::repositories::Repositories;
+use domain::repositories_trait::RepositoriesTrait;
+use dotenv::dotenv;
+
+extern crate dotenv;
 
 mod adapters;
 mod application;
 mod domain;
 
 fn main() {
-    let mut productRepository = ProductDatabaseJsonRepository::new();
-    let a = productRepository.get_all();
-    println!("{:?}", a);
+    dotenv().ok();
+    let rep = Repositories::new();
+    let b = rep.product().get_all();
+    println!("{:?}", b);
 }

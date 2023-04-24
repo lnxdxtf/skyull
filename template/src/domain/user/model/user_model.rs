@@ -14,6 +14,7 @@ impl UserModel {
     }
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum UserRole {
     Admin,
     Normal,

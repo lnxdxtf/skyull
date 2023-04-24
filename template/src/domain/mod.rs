@@ -1,3 +1,3 @@
 pub mod product;
-pub mod repositories;
+pub mod repositories_trait;
 pub mod user;

@@ -1,22 +1,22 @@
 use crate::domain::product::{model::product_model::ProductModel, repository::product_repository::ProductRepository};
 
-fn mocket_products() -> std::io::Result<Vec<ProductModel>> {
+fn mocked_products() -> std::io::Result<Vec<ProductModel>> {
     let mocked_data_as_bytes = include_bytes!("data_product.json");
     let mocked_data_as_model: Vec<ProductModel> = serde_json::from_str(std::str::from_utf8(mocked_data_as_bytes).unwrap()).unwrap();
     Ok(mocked_data_as_model)
 }
 
-pub struct ProductDatabaseJsonRepository {
+pub struct ProductMockedRepository {
     products: Option<Vec<ProductModel>>,
     last_product_created: Option<ProductModel>,
 }
-impl ProductDatabaseJsonRepository {
-    pub fn new() -> ProductDatabaseJsonRepository {
-        let products = match mocket_products() {
+impl ProductMockedRepository {
+    pub fn new() -> ProductMockedRepository {
+        let products = match mocked_products() {
             Ok(value) => Some(value),
             Err(_) => None,
         };
-        ProductDatabaseJsonRepository {
+        ProductMockedRepository {
             products,
             last_product_created: None,
         }
@@ -24,12 +24,12 @@ impl ProductDatabaseJsonRepository {
 }
 
 #[async_trait::async_trait]
-impl ProductRepository for ProductDatabaseJsonRepository {
+impl ProductRepository for ProductMockedRepository {
     fn create(&mut self, product: ProductModel) {
         self.last_product_created = Some(product);
     }
 
-    fn get_all(&mut self) -> Option<Vec<ProductModel>> {
+    fn get_all(&self) -> Option<Vec<ProductModel>> {
         self.products.clone()
     }
 
@@ -43,11 +43,5 @@ impl ProductRepository for ProductDatabaseJsonRepository {
 
     async fn delete_by_id(&mut self, id: String) {
         todo!()
-    }
-}
-impl ProductDatabaseJsonRepository {
-    fn get_mocked_data<T: From<ProductModel>>() -> Vec<T> {
-        let mocked_data = mocket_products().unwrap();
-        mocked_data.into_iter().map(|x| x.into()).collect()
     }
 }
