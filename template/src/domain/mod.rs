@@ -1,3 +1,2 @@
-pub mod product;
-pub mod repositories_trait;
-pub mod user;
+pub mod entities;
+pub mod traits;
