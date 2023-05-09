@@ -2,26 +2,28 @@ use std::io;
 use std::marker::PhantomData;
 use thiserror::Error;
 
-// Use this every time you need create a new instance of a repository for any entity type
-// Where Repository is a repository generic for a entity
-// ex: Repository<Entity>, but the Repository<Entity> is just a repository generic like Repository
-pub struct RepositoryGeneric<Repository> {
-    pub repository: Repository,
-    _marker: PhantomData<Repository>,
+// This struct stores all repositories in a single place.
+// Use this to centralize all repositories.
+// If you need more repositories, add a generic parameter and a corresponding field in the struct, and implement it in the `new` function.
+pub struct RepositoriesApp<RepositoryX, RepositoryY> {
+    pub repository_x: RepositoryX,
+    pub repository_y: RepositoryY,
+    _marker: PhantomData<(RepositoryX, RepositoryY)>,
 }
-impl<Repository> RepositoryGeneric<Repository> {
-    pub fn new(repository: Repository) -> RepositoryGeneric<Repository> {
-        RepositoryGeneric {
-            repository,
+
+impl<RepositoryX, RepositoryY> RepositoriesApp<RepositoryX, RepositoryY> {
+    // Creates a new instance of RepositoriesApp with the provided repositories.
+    pub fn new(repository_x: RepositoryX, repository_y: RepositoryY) -> RepositoriesApp<RepositoryX, RepositoryY> {
+        RepositoriesApp {
+            repository_x,
+            repository_y,
             _marker: PhantomData,
         }
     }
 }
 
-// How to use:
-// let repo = Repository::new(Repository_Entity).repository;
-// where Repository_Entity: struct that implements trait RepositoryTrait<Entity>
-
+// This is the default-generic implementation for any repository structure (e.g., database, mocked, local, etc.).
+// It needs to be implemented for each repository type.
 #[async_trait::async_trait]
 pub trait RepositoryTrait<Entity> {
     async fn create(&mut self, item: Entity) -> Result<(), RepositoryError>;
@@ -31,24 +33,24 @@ pub trait RepositoryTrait<Entity> {
     async fn get_all(&self) -> Result<Option<Vec<Entity>>, RepositoryError>;
 }
 
-// If you want to use this default enum errors... go ahead
+// Default implementation for errors in repository operations.
 #[derive(Error, Debug)]
 pub enum RepositoryError {
-    #[error("Cannot connect the repository to database")]
-    Disconect(#[from] io::Error),
+    #[error("Failed to connect the repository to the database")]
+    Disconnected(#[from] io::Error),
 
-    #[error("Cannot create")]
+    #[error("Failed to create")]
     Create(String),
 
-    #[error("Cannot update")]
+    #[error("Failed to update")]
     Update(String),
 
-    #[error("Cannot Get by id")]
+    #[error("Failed to retrieve by ID")]
     GetById(String),
 
-    #[error("Cannot Get All")]
-    GetALL(String),
+    #[error("Failed to retrieve all")]
+    GetAll(String),
 
-    #[error("Cannot Delete by id")]
+    #[error("Failed to delete by ID")]
     DeleteById(String),
 }

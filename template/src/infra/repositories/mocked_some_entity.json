@@ -1,7 +1,7 @@
 [
-    {"name": "name-00"},
-    {"name": "name-01"},
-    {"name": "name-02"},
-    {"name": "name-03"},
-    {"name": "name-04"}
+    {"id":"c5d912a5-0906-4ebc-988d-9d6639d57b4c","name": "name-00"},
+    {"id":"98703dbb-2b50-4a37-9f94-8fbbd1be398e","name": "name-01"},
+    {"id":"ef4d3d8b-2099-4b2b-8f92-9a4312c87efc","name": "name-02"},
+    {"id":"4a361417-704c-4961-8de9-d0b1b33e4a77","name": "name-03"},
+    {"id":"95c35fb0-5d74-4d8f-8df0-73a5c735a819","name": "name-04"}
 ]
